@@ -47,8 +47,8 @@ start_plt = 0
 
 t_data = np.loadtxt(f"./data/step{step}_t{end}.csv",delimiter = ",")
 
-e_all_p = np.loadtxt(dir_base_0 + f"s{n_seed}_m{alpha_lambda_0}_a{alpha_sa1_0}_{alpha_sb1_0}_m{alpha_sm1_0}_{alpha_sm2_0}_T{T}_step{step}_t{end}_e_all.csv",delimiter = ",")
-e_all_c = np.loadtxt(dir_base_1 + f"s{n_seed}_m{alpha_lambda_1}_a{alpha_sa1_1}_{alpha_sb1_1}_m{alpha_sm1_1}_{alpha_sm2_1}_T{T}_step{step}_t{end}_e_all.csv",delimiter = ",")
+e_all_p = np.load(dir_base_0 + f"s{n_seed}_m{alpha_lambda_0}_a{alpha_sa1_0}_{alpha_sb1_0}_m{alpha_sm1_0}_{alpha_sm2_0}_T{T}_step{step}_t{end}_e_all.npy")
+e_all_c = np.load(dir_base_1 + f"s{n_seed}_m{alpha_lambda_1}_a{alpha_sa1_1}_{alpha_sb1_1}_m{alpha_sm1_1}_{alpha_sm2_1}_T{T}_step{step}_t{end}_e_all.npy")
 
 fig, axes = plt.subplots(nrows=9, ncols=3, sharex=False)
 

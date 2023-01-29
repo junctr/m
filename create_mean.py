@@ -48,16 +48,17 @@ start_plt = 0
 
 t_data = np.loadtxt(f"./data/step{step}_t{end}.csv",delimiter = ",")
 
-# e_all_p = np.loadtxt(dir_base_0 + f"s{n_seed}_m{alpha_lambda_0}_a{alpha_sa1_0}_{alpha_sb1_0}_m{alpha_sm1_0}_{alpha_sm2_0}_T{T}_step{step}_t{end}_e_all.csv",delimiter = ",")
-# e_all_c = np.loadtxt(dir_base_1 + f"s{n_seed}_m{alpha_lambda_1}_a{alpha_sa1_1}_{alpha_sb1_1}_m{alpha_sm1_1}_{alpha_sm2_1}_T{T}_step{step}_t{end}_e_all.csv",delimiter = ",")
-
 n = 100
 
-e0 = np.zeros((n,100000))
-e1 = np.zeros((n,100000))
-e2 = np.zeros((n,100000))
+m = int(end/step/10)
 
-norm = np.zeros((n,100000))
+e0 = np.zeros((n,m))
+e1 = np.zeros((n,m))
+e2 = np.zeros((n,m))
+
+norm = np.zeros((n,m))
+
+e_mean = np.zeros((7,n,m))
 
 for i in tqdm(range(n)):
     
@@ -82,9 +83,15 @@ e2_abs_mean = np.mean(e2_abs,axis=0)
 
 norm_mean = np.mean(norm,axis=0)
 
-e_mean = [e0_mean,e1_mean,e2_mean,e0_abs_mean,e1_abs_mean,e2_abs_mean,norm_mean]
+e_mean[0] = e0_mean
+e_mean[1] = e1_mean
+e_mean[2] = e2_mean
+e_mean[3] = e0_abs_mean
+e_mean[4] = e1_abs_mean
+e_mean[5] = e2_abs_mean
+e_mean[6] = norm_mean
 
 os.makedirs(dir_base_0, exist_ok=True)
 
-np.savetxt(dir_base_0 + f"m{alpha_lambda_0}_a{alpha_sa1_0}_{alpha_sb1_0}_m{alpha_sm1_0}_{alpha_sm2_0}_T{T}_step{step}_t{end}_mean.csv",e_mean,delimiter = ",")
-np.savetxt(dir_base_0 + f"m{alpha_lambda_0}_a{alpha_sa1_0}_{alpha_sb1_0}_m{alpha_sm1_0}_{alpha_sm2_0}_T{T}_step{step}_t{end}_norm.csv",norm,delimiter = ",")
+np.save(dir_base_0 + f"m{alpha_lambda_0}_a{alpha_sa1_0}_{alpha_sb1_0}_m{alpha_sm1_0}_{alpha_sm2_0}_T{T}_step{step}_t{end}_mean.npy",e_mean)
+np.save(dir_base_0 + f"m{alpha_lambda_0}_a{alpha_sa1_0}_{alpha_sb1_0}_m{alpha_sm1_0}_{alpha_sm2_0}_T{T}_step{step}_t{end}_norm.npy",norm)

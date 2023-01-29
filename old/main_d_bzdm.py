@@ -17,14 +17,16 @@ import os
 import datetime
 from numba import njit
 
-@njit
-def sim(n_seed,alpha_lambda,alpha_sa1,alpha_sb1,alpha_sm1,alpha_sm2,T,step,end):
+# @njit
+def main(n_seed: int):
     
     np.random.seed(n_seed)
     
     t = 0.0
     i = 0
-    i_10 = 0
+    
+    end = 100
+    step = 0.0001
 
     alpha_w = 50.0 * np.identity(5)
     alpha_v = 20.0 * np.identity(75)
@@ -32,8 +34,15 @@ def sim(n_seed,alpha_lambda,alpha_sa1,alpha_sb1,alpha_sm1,alpha_sm2,T,step,end):
     alpha_b = 20.0 * np.identity(75)
     alpha_beta = 0.001 * np.identity(5)
     alpha_zeta = 0.1
+    alpha_lambda = 0.0
     alpha_d = 10.0 * np.identity(3)
     alpha_dk = 0.2 * np.identity(3)
+    alpha_sa1 = 1.0
+    alpha_sb1 = 1.0
+    alpha_sm1 = 2.0
+    alpha_sm2 = 0.6
+
+    T = 1000
 
     p = np.array([4, 3, 1.5])
     l = np.array([0.4, 0.3, 0.2])
@@ -57,8 +66,8 @@ def sim(n_seed,alpha_lambda,alpha_sa1,alpha_sb1,alpha_sm1,alpha_sm2,T,step,end):
         [m * 0.5, n * np.pi],
         [m * 0.5, n * np.pi]]
     )
-    # xold0 = np.array([[m*0.5,m*0.5,m*0.5,n*np.pi,n*np.pi,n*np.pi,0,0,0,np.pi,np.pi,np.pi,0,0,0]]).copy().reshape(-1,1)
-    xold0 = np.array([[m*0.5,m*0.5,m*0.5,n*np.pi,n*np.pi,n*np.pi,0,0,0,np.pi,np.pi,np.pi,(1-n)*np.pi-m*2.5,(1-n)*np.pi-m*2.5,(1-n)*np.pi-m*2.5]]).copy().reshape(-1,1)
+    # xold0 = np.array([[m*0.5,m*0.5,m*0.5,n*np.pi,n*np.pi,n*np.pi,0,0,0,np.pi,np.pi,np.pi,0,0,0]]).reshape(-1,1)
+    xold0 = np.array([[m*0.5,m*0.5,m*0.5,n*np.pi,n*np.pi,n*np.pi,0,0,0,np.pi,np.pi,np.pi,(1-n)*np.pi-m*2.5,(1-n)*np.pi-m*2.5,(1-n)*np.pi-m*2.5]]).reshape(-1,1)
     xold = [xold0 for i_xold in range(T)]
 
     W = 50 * 2 * (np.random.rand(5,3) - 0.5)
@@ -85,10 +94,36 @@ def sim(n_seed,alpha_lambda,alpha_sa1,alpha_sb1,alpha_sm1,alpha_sm2,T,step,end):
     boldold = b.copy()
     Doldold = D.copy()
 
-    e_all = np.zeros((27,int(end/step/10)))
+    e_0 = []
+    e_1 = []
+    e_2 = []
+    e_3 = []
+    e_4 = []
+    e_5 = []
+    e_6 = []
+    e_7 = []
+    e_8 = []
+    e_9 = []
+    e_10 = []
+    e_11 = []
+    e_12 = []
+    e_13 = []
+    e_14 = []
+    e_15 = []
+    e_16 = []
+    e_17 = []
+    e_18 = []
+    e_19 = []
+    e_20 = []
+    e_21 = []
+    e_22 = []
+    e_23 = []
+    e_24 = []
+    e_25 = []
+    e_26 = []
 
-    # for i in tqdm(range(int(end/step))):
-    for i in range(int(end/step)):
+    for i in tqdm(range(int(end/step))):
+    # for i in range(int(end/step)):
 
         qd = qd_f(t)
         e = e_f(t,q)
@@ -121,10 +156,6 @@ def sim(n_seed,alpha_lambda,alpha_sa1,alpha_sb1,alpha_sm1,alpha_sm2,T,step,end):
             k_zeta = 0.0
             k_D = np.zeros((3,3))
 
-        # k_beta = np.linalg.norm(s) * alpha_beta @ omega
-        # k_zeta = -alpha_zeta * zeta
-        # k_D = alpha_d @ np.sign(taud) @ s.T - alpha_d @ alpha_dk @ D * np.linalg.norm(s)
-
         k1_q = system(t,q,tau,p,l,g)
         k2_q = system(t+step/2,q+(step/2)*k1_q,tau,p,l,g)
         k3_q = system(t+step/2,q+(step/2)*k2_q,tau,p,l,g)
@@ -145,42 +176,40 @@ def sim(n_seed,alpha_lambda,alpha_sa1,alpha_sb1,alpha_sm1,alpha_sm2,T,step,end):
         Dold = D.copy()
 
         if i%10 == 0:
-                
-                e_all[0][i_10] = e[0][0]
-                e_all[1][i_10] = e[1][0]
-                e_all[2][i_10] = e[2][0]
-                e_all[3][i_10] = e[0][1]
-                e_all[4][i_10] = e[1][1]
-                e_all[5][i_10] = e[2][1]
-                e_all[6][i_10] = s[0][0]
-                e_all[7][i_10] = s[1][0]
-                e_all[8][i_10] = s[2][0]
-                e_all[9][i_10] = tau[0][0]
-                e_all[10][i_10] = tau[1][0]
-                e_all[11][i_10] = tau[2][0]
-                e_all[12][i_10] = taud[0][0]
-                e_all[13][i_10] = taud[1][0]
-                e_all[14][i_10] = taud[2][0]
-                e_all[15][i_10] = y[0][0]
-                e_all[16][i_10] = y[1][0]
-                e_all[17][i_10] = y[2][0]
-                e_all[18][i_10] = taus0[0][0]
-                e_all[19][i_10] = taus0[1][0]
-                e_all[20][i_10] = taus0[2][0]
-                e_all[21][i_10] = D[0][0]
-                e_all[22][i_10] = D[1][1]
-                e_all[23][i_10] = D[2][2]
-                e_all[24][i_10] = (beta.T @ omega)[0][0]
-                e_all[25][i_10] = np.linalg.norm(s)
-                e_all[26][i_10] = np.linalg.norm(e[:,0:1])
-                
-                i_10 += 1
+
+                e_0.append(e[0][0])
+                e_1.append(e[1][0])
+                e_2.append(e[2][0])
+                e_3.append(e[0][1])
+                e_4.append(e[1][1])
+                e_5.append(e[2][1])
+                e_6.append(s[0][0])
+                e_7.append(s[1][0])
+                e_8.append(s[2][0])
+                e_9.append(tau[0][0])
+                e_10.append(tau[1][0])
+                e_11.append(tau[2][0])
+                e_12.append(taud[0][0])
+                e_13.append(taud[1][0])
+                e_14.append(taud[2][0])
+                e_15.append(y[0][0])
+                e_16.append(y[1][0])
+                e_17.append(y[2][0])
+                e_18.append(taus0[0][0])
+                e_19.append(taus0[1][0])
+                e_20.append(taus0[2][0])
+                e_21.append(D[0][0])
+                e_22.append(D[1][1])
+                e_23.append(D[2][2])
+                e_24.append(beta.T @ omega)
+                e_25.append(np.linalg.norm(s))
+                e_26.append(np.linalg.norm(e[:,0:1]))
 
         q += (step / 6) * (k1_q + 2 * k2_q + 2 * k3_q + k4_q)
-        W += step * (alpha_w @ (mu.copy().reshape(5,1) - vk.T @ v.T.copy().reshape(-1,1) - ak.T @ a.T.copy().reshape(-1,1) - bk.T @ b.T.copy().reshape(-1,1)) @ s.T) + alpha_lambda * (Wold - Woldold)
-        v += step * ((alpha_v @ vk @ W @ s).copy().reshape(5,15).T) + alpha_lambda * (vold - voldold)
-        a += step * ((alpha_a @ ak @ W @ s).copy().reshape(5,15).T) + alpha_lambda * (aold - aoldold)
-        b += step * ((alpha_b @ bk @ W @ s).copy().reshape(5,15).T) + alpha_lambda * (bold - boldold)
+        W += step * (alpha_w @ (mu.reshape(5,1) - vk.T @ v.T.reshape(-1,1) - ak.T @ a.T.reshape(-1,1) - bk.T @ b.T.reshape(-1,1)) @ s.T) + alpha_lambda * (Wold - Woldold)
+        v += step * ((alpha_v @ vk @ W @ s).reshape(5,15).T) + alpha_lambda * (vold - voldold)
+        a += step * ((alpha_a @ ak @ W @ s).reshape(5,15).T) + alpha_lambda * (aold - aoldold)
+        b += step * ((alpha_b @ bk @ W @ s).reshape(5,15).T) + alpha_lambda * (bold - boldold)
         beta += step * k_beta
         zeta += step * k_zeta
         # D += step * k_D
@@ -189,26 +218,42 @@ def sim(n_seed,alpha_lambda,alpha_sa1,alpha_sb1,alpha_sm1,alpha_sm2,T,step,end):
         t += step
         i += 1
 
-    return e_all
+    e_all = [
+        e_0,
+        e_1,
+        e_2,
+        e_3,
+        e_4,
+        e_5,
+        e_6,
+        e_7,
+        e_8,
+        e_9,
+        e_10,
+        e_11,
+        e_12,
+        e_13,
+        e_14,
+        e_15,
+        e_16,
+        e_17,
+        e_18,
+        e_19,
+        e_20,
+        e_21,
+        e_22,
+        e_23,
+        e_24,
+        e_25,
+        e_26,
+    ]
 
-# @njit
-def main(n_seed: int):
-    
-    alpha_lambda = 0.0
-    alpha_sa1 = 1.0
-    alpha_sb1 = 1.0
-    alpha_sm1 = 2.0
-    alpha_sm2 = 0.6
-    
-    T = 1000
-    step = 0.0001
-    end = 100
-    
-    result = sim(n_seed,alpha_lambda,alpha_sa1,alpha_sb1,alpha_sm1,alpha_sm2,T,step,end)
+    param_all = [v,a,b,W,D,beta,zeta]
 
     dir_base = "./data/bzdm/"
     os.makedirs(dir_base, exist_ok=True)
-    np.save(dir_base + f"s{n_seed}_m{alpha_lambda}_a{alpha_sa1}_{alpha_sb1}_m{alpha_sm1}_{alpha_sm2}_T{T}_step{step}_t{end}_e_all.npy",result)
+    np.save(dir_base + f"s{n_seed}_m{alpha_lambda}_a{alpha_sa1}_{alpha_sb1}_m{alpha_sm1}_{alpha_sm2}_T{T}_step{step}_t{end}_param_all.npy",param_all)
+    np.savetxt(dir_base + f"s{n_seed}_m{alpha_lambda}_a{alpha_sa1}_{alpha_sb1}_m{alpha_sm1}_{alpha_sm2}_T{T}_step{step}_t{end}_e_all.csv",e_all,delimiter = ",")
 
 if __name__ == '__main__':
     
@@ -234,10 +279,4 @@ if __name__ == '__main__':
 
 # if __name__ == '__main__':
     
-#     start = time.perf_counter()
-    
-#     print(datetime.datetime.now())
-    
 #     main(0)
-    
-#     print(time.perf_counter() - start)
