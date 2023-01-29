@@ -31,4 +31,4 @@ dir_base = "./data/"
 # dir_base = "./"
 os.makedirs(dir_base, exist_ok=True)
 print(len(t_data))
-np.savetxt(f"step{step}_t{end}.csv",t_data,delimiter = ",")
+np.savetxt(dir_base + f"step{step}_t{end}.csv",t_data,delimiter = ",")
