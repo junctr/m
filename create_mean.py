@@ -58,7 +58,7 @@ e2 = np.zeros((n,m))
 
 norm = np.zeros((n,m))
 
-e_mean = np.zeros((7,n,m))
+e_mean = np.zeros((7,m))
 
 for i in tqdm(range(n)):
     
