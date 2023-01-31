@@ -110,7 +110,7 @@ def sim(n_seed,alpha_lambda,alpha_sa1,alpha_sb1,alpha_sm1,alpha_sm2,T,step,end):
         ak = ak_f(mu,muji,A,Aold,B,v,a,b,xold[-1])
         bk = bk_f(mu,muji,A,Aold,B,v,a,b)
 
-        if zeta > 0.1:
+        if zeta > 0.015:
 
             k_beta = np.linalg.norm(s) * alpha_beta @ omega
             k_zeta = -alpha_zeta * zeta
