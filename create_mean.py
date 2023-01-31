@@ -62,7 +62,7 @@ e_mean = np.zeros((7,n,m))
 
 for i in tqdm(range(n)):
     
-    e_all_p = np.loadtxt(dir_base_0 + f"s{i}_m{alpha_lambda_0}_a{alpha_sa1_0}_{alpha_sb1_0}_m{alpha_sm1_0}_{alpha_sm2_0}_T{T}_step{step}_t{end}_e_all.csv",delimiter = ",")
+    e_all_p = np.load(dir_base_0 + f"s{i}_m{alpha_lambda_0}_a{alpha_sa1_0}_{alpha_sb1_0}_m{alpha_sm1_0}_{alpha_sm2_0}_T{T}_step{step}_t{end}_e_all.npy")
     
     e0[i] = e_all_p[0]
     e1[i] = e_all_p[1]
@@ -91,7 +91,7 @@ e_mean[4] = e1_abs_mean
 e_mean[5] = e2_abs_mean
 e_mean[6] = norm_mean
 
-os.makedirs(dir_base_0, exist_ok=True)
+os.makedirs(dir_base_0 + "mean/", exist_ok=True)
 
 np.save(dir_base_0 + f"mean/m{alpha_lambda_0}_a{alpha_sa1_0}_{alpha_sb1_0}_m{alpha_sm1_0}_{alpha_sm2_0}_T{T}_step{step}_t{end}_mean.npy",e_mean)
 np.save(dir_base_0 + f"mean/m{alpha_lambda_0}_a{alpha_sa1_0}_{alpha_sb1_0}_m{alpha_sm1_0}_{alpha_sm2_0}_T{T}_step{step}_t{end}_norm.npy",norm)
