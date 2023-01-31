@@ -71,7 +71,7 @@ def sim(n_seed,alpha_lambda,alpha_sa1,alpha_sb1,alpha_sm1,alpha_sm2,T,step,end):
     v = j * 0.1 * 2 * (np.random.rand(15,5) - 0.5)
     a = (1/j) * 0.5 * 2 * (np.random.rand(15,5) - 0.5)
     b = j * 1 * 2 * (np.random.rand(15,5) - 0.5)
-    D = np.ones((3,3))
+    D = np.zeros((3,3))
     
     Wold = W.copy()
     vold = v.copy()
