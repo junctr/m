@@ -25,8 +25,8 @@ start_plt = 0
 
 t_data = np.loadtxt(f"./data/step{step}_t{end}.csv",delimiter = ",")
 
-e_all_p = np.load(dir_base_0 + f"m{alpha_lambda_0}_a{alpha_sa1_0}_{alpha_sb1_0}_m{alpha_sm1_0}_{alpha_sm2_0}_T{T}_step{step}_t{end}_norm.npy")
-# e_all_c = np.load(dir_base_1 + f"m{alpha_lambda_1}_a{alpha_sa1_1}_{alpha_sb1_1}_m{alpha_sm1_1}_{alpha_sm2_1}_T{T}_step{step}_t{end}_norm.npy")
+e_all_p = np.load(dir_base_0 + f"mean/m{alpha_lambda_0}_a{alpha_sa1_0}_{alpha_sb1_0}_m{alpha_sm1_0}_{alpha_sm2_0}_T{T}_step{step}_t{end}_norm.npy")
+# e_all_c = np.load(dir_base_1 + f"mean/m{alpha_lambda_1}_a{alpha_sa1_1}_{alpha_sb1_1}_m{alpha_sm1_1}_{alpha_sm2_1}_T{T}_step{step}_t{end}_norm.npy")
 
 fig, axes = plt.subplots(nrows=10, ncols=10, sharex=False)
 

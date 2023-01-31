@@ -46,7 +46,7 @@ end = 100
 end_plt = 100
 start_plt = 0
 
-t_data = np.loadtxt(f"./data/step{step}_t{end}.csv",delimiter = ",")
+# t_data = np.loadtxt(f"./data/step{step}_t{end}.csv",delimiter = ",")
 
 n = 100
 
@@ -93,5 +93,5 @@ e_mean[6] = norm_mean
 
 os.makedirs(dir_base_0, exist_ok=True)
 
-np.save(dir_base_0 + f"m{alpha_lambda_0}_a{alpha_sa1_0}_{alpha_sb1_0}_m{alpha_sm1_0}_{alpha_sm2_0}_T{T}_step{step}_t{end}_mean.npy",e_mean)
-np.save(dir_base_0 + f"m{alpha_lambda_0}_a{alpha_sa1_0}_{alpha_sb1_0}_m{alpha_sm1_0}_{alpha_sm2_0}_T{T}_step{step}_t{end}_norm.npy",norm)
+np.save(dir_base_0 + f"mean/m{alpha_lambda_0}_a{alpha_sa1_0}_{alpha_sb1_0}_m{alpha_sm1_0}_{alpha_sm2_0}_T{T}_step{step}_t{end}_mean.npy",e_mean)
+np.save(dir_base_0 + f"mean/m{alpha_lambda_0}_a{alpha_sa1_0}_{alpha_sb1_0}_m{alpha_sm1_0}_{alpha_sm2_0}_T{T}_step{step}_t{end}_norm.npy",norm)
