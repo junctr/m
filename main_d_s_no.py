@@ -192,11 +192,10 @@ def sim(n_seed,alpha_lambda,alpha_sa1,alpha_sb1,alpha_sm1,alpha_sm2,T,step,end):
     return e_all
 
 # @njit
-def main(n_seed: int):
+def main(n_seed,alpha_lambda,alpha_sab1):
     
-    alpha_lambda = 0.0
-    alpha_sa1 = 1.0
-    alpha_sb1 = 1.0
+    alpha_sa1 = alpha_sab1
+    alpha_sb1 = alpha_sab1
     alpha_sm1 = 2.0
     alpha_sm2 = 0.6
     
@@ -216,15 +215,23 @@ if __name__ == '__main__':
     
     print(datetime.datetime.now())
     
-    use_cpu = 5
+    use_cpu = 20
     
     print(f"use cpu core {use_cpu}/{cpu_count()}")
 
     init = []
 
-    for i in range(100):
+    list_alpha_lambda = [0.0,0.3,0.5]
+    
+    list_alpha_sab1 = [1.0,2.0,3.0]
+
+    for i in range(120):
         
-        init.append((i,))
+        for j in list_alpha_lambda:
+            
+            for k in list_alpha_sab1:
+                
+                init.append((i,j,k))
 
     with Pool(use_cpu) as p:
         

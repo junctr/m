@@ -27,10 +27,10 @@ e_25.append(np.linalg.norm(s))
 e_26.append(np.linalg.norm(e[:,0:1]))
 """
 
-def main(alpha_lambda_0,alpha_ab):
+def main(alpha_lambda_0,alpha_sab1):
 
-    alpha_sa1_0 = alpha_ab
-    alpha_sb1_0 = alpha_ab
+    alpha_sa1_0 = alpha_sab1
+    alpha_sb1_0 = alpha_sab1
     alpha_sm1_0 = 2.0
     alpha_sm2_0 = 0.6
     dir_base_0 = "./data/s_bzdm/"
@@ -113,13 +113,13 @@ if __name__ == '__main__':
 
     init = []
 
-    list_m = [0.0,0.3,0.5]
+    list_alpha_lambda = [0.0,0.3,0.5]
     
-    list_ab = [1.0,2.0,3.0]
+    list_alpha_sab1 = [1.0,2.0,3.0]
 
-    for j in list_m:
+    for j in list_alpha_lambda:
         
-        for k in list_ab:
+        for k in list_alpha_sab1:
             
             init.append((j,k))
         
