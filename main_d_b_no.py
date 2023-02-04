@@ -226,7 +226,7 @@ if __name__ == '__main__':
     
     list_alpha_sab1 = [1.0,2.0,3.0]
 
-    for i in range(120):
+    for i in range(200):
         
         for j in list_alpha_lambda:
             
