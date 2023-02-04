@@ -51,7 +51,7 @@ def main(alpha_lambda_0,alpha_sab1):
 
     # t_data = np.loadtxt(f"./data/step{step}_t{end}.csv",delimiter = ",")
 
-    n = 120
+    n = 200
 
     m = int(end/step/10)
 
@@ -96,8 +96,8 @@ def main(alpha_lambda_0,alpha_sab1):
 
     os.makedirs(dir_base_0 + "mean/", exist_ok=True)
 
-    np.save(dir_base_0 + f"mean/m{alpha_lambda_0}_a{alpha_sa1_0}_{alpha_sb1_0}_m{alpha_sm1_0}_{alpha_sm2_0}_T{T}_step{step}_t{end}_mean_120.npy",e_mean)
-    np.save(dir_base_0 + f"mean/m{alpha_lambda_0}_a{alpha_sa1_0}_{alpha_sb1_0}_m{alpha_sm1_0}_{alpha_sm2_0}_T{T}_step{step}_t{end}_norm_120.npy",norm)
+    np.save(dir_base_0 + f"mean/m{alpha_lambda_0}_a{alpha_sa1_0}_{alpha_sb1_0}_m{alpha_sm1_0}_{alpha_sm2_0}_T{T}_step{step}_t{end}_mean_200.npy",e_mean)
+    np.save(dir_base_0 + f"mean/m{alpha_lambda_0}_a{alpha_sa1_0}_{alpha_sb1_0}_m{alpha_sm1_0}_{alpha_sm2_0}_T{T}_step{step}_t{end}_norm_200.npy",norm)
 
 
 
