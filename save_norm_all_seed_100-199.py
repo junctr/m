@@ -44,7 +44,7 @@ def main(dir_base_0,alpha_lambda_0,alpha_sab1):
             # axes[i,j].grid()
             axes[i,j].set_title(f"{100+10*i+j}", loc="right", pad=-10.0)
 
-    plt.subplots_adjust(left=0.01, right=0.99, bottom=0.01, top=0.99, hspace=0.01, wspace=0.01)
+    plt.subplots_adjust(left=0.01, right=0.99, bottom=0.01, top=0.95, hspace=0.01, wspace=0.01)
     plt.suptitle(dir_base_0 + f"m{alpha_lambda_0}_a{alpha_sa1_0}_{alpha_sb1_0}_m{alpha_sm1_0}_{alpha_sm2_0}_T{T}_step{step}_t{end}_norm_s100-199")
     
     os.makedirs(dir_base_0 + "fig/", exist_ok=True)
