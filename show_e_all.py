@@ -50,6 +50,8 @@ t_data = np.loadtxt(f"./data/step{step}_t{end}.csv",delimiter = ",")
 e_all_p = np.load(dir_base_0 + f"s{n_seed}_m{alpha_lambda_0}_a{alpha_sa1_0}_{alpha_sb1_0}_m{alpha_sm1_0}_{alpha_sm2_0}_T{T}_step{step}_t{end}_e_all.npy")
 # e_all_c = np.load(dir_base_1 + f"s{n_seed}_m{alpha_lambda_1}_a{alpha_sa1_1}_{alpha_sb1_1}_m{alpha_sm1_1}_{alpha_sm2_1}_T{T}_step{step}_t{end}_e_all.npy")
 
+plt.rcParams["figure.figsize"] = [16,9]
+
 fig, axes = plt.subplots(nrows=9, ncols=3, sharex=False)
 
 for i in range(9):
@@ -66,4 +68,5 @@ for i in range(9):
 
 # plt.savefig(f"abrfwnn/data_test/s{n_seed}_m{alpha_lambda}_wn{alpha_wn0}_{alpha_wn1}_s{alpha_s0}_{alpha_s1}_{alpha_s2}_T{T}_step{step}_t{end}_all.png")
 
+plt.subplots_adjust(left=0.01, right=0.99, bottom=0.01, top=0.95, hspace=0.01, wspace=0.01)
 plt.show()

@@ -28,8 +28,10 @@ start_plt = 0
 
 t_data = np.loadtxt(f"./data/step{step}_t{end}.csv",delimiter = ",")
 
-e_all_p = np.load(dir_base_0 + f"mean/m{alpha_lambda_0}_a{alpha_sa1_0}_{alpha_sb1_0}_m{alpha_sm1_0}_{alpha_sm2_0}_T{T}_step{step}_t{end}_mean.npy")
-# e_all_c = np.load(dir_base_1 + f"mean/m{alpha_lambda_1}_a{alpha_sa1_1}_{alpha_sb1_1}_m{alpha_sm1_1}_{alpha_sm2_1}_T{T}_step{step}_t{end}_mean.npy")
+e_all_p = np.load(dir_base_0 + f"mean/m{alpha_lambda_0}_a{alpha_sa1_0}_{alpha_sb1_0}_m{alpha_sm1_0}_{alpha_sm2_0}_T{T}_step{step}_t{end}_mean_remove.npy")
+# e_all_c = np.load(dir_base_1 + f"mean/m{alpha_lambda_1}_a{alpha_sa1_1}_{alpha_sb1_1}_m{alpha_sm1_1}_{alpha_sm2_1}_T{T}_step{step}_t{end}_mean_remove.npy")
+
+plt.rcParams["figure.figsize"] = [16,9]
 
 fig, axes = plt.subplots(nrows=2, ncols=3, sharex=False)
 
@@ -50,4 +52,5 @@ for i in range(2):
 # plt.plot(t_data, e_all_c[6])
 # plt.plot(t_data, e_all_p[6])
 
+plt.subplots_adjust(left=0.05, right=0.95, bottom=0.05, top=0.95, hspace=0.01, wspace=0.01)
 plt.show()
