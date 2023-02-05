@@ -64,13 +64,13 @@ if __name__ == '__main__':
 
     init = []
     
-    list_dirbase_0 = ["./data/b_no/","./data/s_no/","./data/s_bzd/","./data/s_bzdm/"]
+    list_dir_base_0 = ["./data/b_no/","./data/s_no/","./data/s_bzd/","./data/s_bzdm/"]
 
     list_alpha_lambda = [0.0,0.3,0.5]
     
     list_alpha_sab1 = [1.0,2.0,3.0]
     
-    for i in list_dirbase_0:
+    for i in list_dir_base_0:
         
         for j in list_alpha_lambda:
             
